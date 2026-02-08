@@ -1,0 +1,134 @@
+email:
+  sender: "earlybird@example.com"
+  subject_prefix: "Early Bird"
+  smtp:
+    host: "smtp.sendgrid.net"
+    port: 587
+    use_tls: true
+
+schedule:
+  time: "08:00"
+  timezone: "America/Chicago"
+  enabled: true
+
+sources:
+  rss_feeds:
+    # AI News
+    - name: "MIT Technology Review AI"
+      url: "https://www.technologyreview.com/topic/artificial-intelligence/feed/"
+      category: "ai"
+      enabled: true
+
+    - name: "VentureBeat AI"
+      url: "https://venturebeat.com/category/ai/feed/"
+      category: "ai"
+      enabled: true
+
+    - name: "TechCrunch AI"
+      url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+      category: "ai"
+      enabled: true
+
+    - name: "AI News"
+      url: "https://www.artificialintelligence-news.com/feed/"
+      category: "ai"
+      enabled: true
+
+    - name: "The Gradient"
+      url: "https://thegradient.pub/rss/"
+      category: "ai"
+      enabled: true
+
+    - name: "Wired AI"
+      url: "https://www.wired.com/feed/tag/ai/latest/rss"
+      category: "ai"
+      enabled: true
+
+    # Robotics News
+    - name: "IEEE Spectrum Robotics"
+      url: "https://spectrum.ieee.org/feeds/topic/robotics.rss"
+      category: "robotics"
+      enabled: true
+
+    - name: "The Robot Report"
+      url: "https://www.therobotreport.com/feed/"
+      category: "robotics"
+      enabled: true
+
+    - name: "Robotics Business Review"
+      url: "https://www.roboticsbusinessreview.com/feed/"
+      category: "robotics"
+      enabled: true
+
+    # Research Papers
+    - name: "ArXiv CS.AI"
+      url: "http://export.arxiv.org/rss/cs.AI"
+      category: "research"
+      enabled: true
+
+    - name: "ArXiv CS.RO"
+      url: "http://export.arxiv.org/rss/cs.RO"
+      category: "research"
+      enabled: true
+
+    # Company Blogs
+    - name: "OpenAI Blog"
+      url: "https://openai.com/blog/rss.xml"
+      category: "ai"
+      enabled: true
+
+    - name: "DeepMind Blog"
+      url: "https://deepmind.google/blog/rss.xml"
+      category: "ai"
+      enabled: true
+
+    - name: "Google AI Blog"
+      url: "https://ai.googleblog.com/feeds/posts/default"
+      category: "ai"
+      enabled: true
+
+filtering:
+  keywords:
+    include:
+      - "AI"
+      - "artificial intelligence"
+      - "machine learning"
+      - "robotics"
+      - "autonomous"
+      - "neural network"
+      - "GPT"
+      - "LLM"
+      - "deep learning"
+      - "computer vision"
+      - "AGI"
+      - "transformer"
+      - "robot"
+      - "automation"
+      - "reinforcement learning"
+      - "natural language"
+      - "generative AI"
+    exclude:
+      - "crypto"
+      - "bitcoin"
+      - "blockchain"
+      - "cryptocurrency"
+  max_articles: 10  # Reduced for easier digestion
+  min_relevance_score: 0.5
+  recency_weight: 2.0  # Boost score for recent articles
+  max_age_days: 3  # Only show articles from last 3 days
+  deduplication:
+    enabled: true
+    similarity_threshold: 0.85
+    lookback_days: 7
+
+# AI-powered summaries (optional)
+ai_summaries:
+  enabled: true  # Set to true to enable OpenAI summaries
+  provider: "openai"  # or "anthropic" for Claude
+  model: "gpt-4o-mini"  # Cost-effective model
+  # Get API key from: https://platform.openai.com/api-keys
+  # Add to .env: OPENAI_API_KEY=your_key_here
+
+collection:
+  timeout_seconds: 5
+  max_articles_per_source: 10

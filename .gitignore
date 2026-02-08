@@ -1,8 +1,47 @@
-__pycache__
-.venv
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Sensitive Files - DO NOT COMMIT
 .env
+credentials.json
+token.pickle
+
+# Generated Files
+cache/
+logs/
+preview.html
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
-.uv/
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# Local Python version
 .python-version
-pyproject.toml
-uv.lock
+
+# UV/pip tools
+.uv/
+
+# Optional: Uncomment if you want to ignore these
+# pyproject.toml
+# uv.lock

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Bird - Your Daily AI & Robotics Digest</title>
+    <style>
+        /* Modern Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header with modern gradient */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 48px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 12px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Stats bar with modern look */
+        .stats {
+            background: linear-gradient(to right, #f8f9ff, #ffffff);
+            padding: 24px 32px;
+            border-bottom: 1px solid #e8ecf4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stats-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stats-icon {
+            font-size: 20px;
+        }
+
+        .stats-text {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .stats-value {
+            color: #1e293b;
+            font-weight: 700;
+        }
+
+        /* Content area */
+        .content {
+            padding: 40px 32px;
+        }
+
+        /* Section headers */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section-icon {
+            font-size: 28px;
+            filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: -0.5px;
+        }
+
+        /* Modern article cards */
+        .article {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border: 2px solid #e8ecf4;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .article:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-source {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+        }
+
+        .badge-category {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .badge-time {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-score {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            color: #ffffff;
+        }
+
+        .article-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 16px 0;
+            line-height: 1.4;
+            letter-spacing: -0.3px;
+        }
+
+        .article-title a {
+            color: #1e293b;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .article-title a:hover {
+            color: #667eea;
+        }
+
+        .article-summary {
+            font-size: 15px;
+            color: #475569;
+            line-height: 1.7;
+            margin: 16px 0;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 16px;
+            transition: all 0.2s;
+        }
+
+        .read-more:hover {
+            gap: 12px;
+            color: #764ba2;
+        }
+
+        .read-more::after {
+            content: '→';
+            font-size: 16px;
+        }
+
+        /* Footer with gradient */
+        .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 40px 32px;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .footer-title {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .footer-link {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 24px auto;
+            border-radius: 2px;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 80px 32px;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                border-radius: 16px;
+            }
+
+            .header {
+                padding: 32px 24px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .content {
+                padding: 24px 20px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .article {
+                padding: 20px;
+            }
+
+            .article-title {
+                font-size: 18px;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">🐦</div>
+                <h1>Early Bird</h1>
+                <p class="header-subtitle">Your Daily AI & Robotics Intelligence</p>
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats">
+            <div class="stats-item">
+                <span class="stats-icon">📅</span>
+                <span class="stats-text"><span class="stats-value">{{ date }}</span></span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-icon">📰</span>
+                <span class="stats-text"><span class="stats-value">{{ article_count }}</span> curated articles</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            {% if grouped_articles['top'] %}
+            <!-- Top Stories Section -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">⭐</span>
+                    <h2 class="section-title">Top Stories</h2>
+                </div>
+                {% for article in grouped_articles['top'] %}
+                <div class="article">
+                    <div class="article-meta">
+                        <span class="badge badge-source">{{ article.source }}</span>
+                        <span class="badge badge-category">{{ article.category.upper() }}</span>
+                        <span class="badge badge-time">⏱ {{ article.get_time_ago() }}</span>
+                        {% if article.relevance_score > 0 %}
+                        <span class="badge badge-score">🔥 {{ "%.1f"|format(article.relevance_score) }}</span>
+                        {% endif %}
+                    </div>
+                    <h3 class="article-title">
+                        <a href="{{ article.url }}" target="_blank">{{ article.get_clean_title() }}</a>
+                    </h3>
+                    {% if article.description %}
+                    <p class="article-summary">{{ article.description }}</p>
+                    {% endif %}
+                    <a href="{{ article.url }}" target="_blank" class="read-more">Read full article</a>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if grouped_articles['ai'] %}
+            <!-- AI News Section -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">🤖</span>
+                    <h2 class="section-title">AI Developments</h2>
+                </div>
+                {% for article in grouped_articles['ai'] %}
+                {% if article not in grouped_articles['top'] %}
+                <div class="article">
+                    <div class="article-meta">
+                        <span class="badge badge-source">{{ article.source }}</span>
+                        <span class="badge badge-time">⏱ {{ article.get_time_ago() }}</span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="{{ article.url }}" target="_blank">{{ article.get_clean_title() }}</a>
+                    </h3>
+                    {% if article.description %}
+                    <p class="article-summary">{{ article.description }}</p>
+                    {% endif %}
+                    <a href="{{ article.url }}" target="_blank" class="read-more">Read full article</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if grouped_articles['robotics'] %}
+            <!-- Robotics Section -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">🦾</span>
+                    <h2 class="section-title">Robotics & Automation</h2>
+                </div>
+                {% for article in grouped_articles['robotics'] %}
+                {% if article not in grouped_articles['top'] %}
+                <div class="article">
+                    <div class="article-meta">
+                        <span class="badge badge-source">{{ article.source }}</span>
+                        <span class="badge badge-time">⏱ {{ article.get_time_ago() }}</span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="{{ article.url }}" target="_blank">{{ article.get_clean_title() }}</a>
+                    </h3>
+                    {% if article.description %}
+                    <p class="article-summary">{{ article.description }}</p>
+                    {% endif %}
+                    <a href="{{ article.url }}" target="_blank" class="read-more">Read full article</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if grouped_articles['research'] %}
+            <!-- Research Section -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">📚</span>
+                    <h2 class="section-title">Research & Papers</h2>
+                </div>
+                {% for article in grouped_articles['research'] %}
+                {% if article not in grouped_articles['top'] %}
+                <div class="article">
+                    <div class="article-meta">
+                        <span class="badge badge-source">{{ article.source }}</span>
+                        <span class="badge badge-time">⏱ {{ article.get_time_ago() }}</span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="{{ article.url }}" target="_blank">{{ article.get_clean_title() }}</a>
+                    </h3>
+                    {% if article.description %}
+                    <p class="article-summary">{{ article.description }}</p>
+                    {% endif %}
+                    <a href="{{ article.url }}" target="_blank" class="read-more">Read full article</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if article_count == 0 %}
+            <!-- Empty State -->
+            <div class="empty-state">
+                <div class="empty-state-icon">🐦</div>
+                <p class="empty-state-text">No articles found for today.</p>
+                <p class="empty-state-text">Check back tomorrow for fresh updates!</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-title">Early Bird</div>
+            <div class="footer-divider"></div>
+            <p class="footer-text">Your daily AI & robotics intelligence digest</p>
+            <p class="footer-text">Curated from 15+ premium sources</p>
+            <p class="footer-text" style="margin-top: 16px; font-size: 12px;">
+                Delivered on {{ date }}
+            </p>
+        </div>
+    </div>
+</body>
+</html>
